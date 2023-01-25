@@ -1,36 +1,52 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { FiSearch } from "react-icons/fi";
 
-const SearchBar = ({dictionary, setDictionary}) => {
-  const [word, setWord] = useState("");
+const SearchBar = ({ onSubmit }) => {
+  const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
 
-  const handleChange = (event) => {
-    setWord(event.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    console.log("value is:", event.target.value);
+    if (!input) {
+      setError(true);
+    } else {
+      document.activeElement?.blur();
+      onSubmit(input);
+      setInput("");
+    }
   };
 
-  const getDictionaryData = (event) => {
-    event.preventDefault();
-    axios
-      .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-      .then((data) => setDictionary(data.data))
-      .catch((error) => console.log(error));
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    setError(false);
   };
+
+  const errorMessage = (
+    <p className="text-red-400">Whoops, can't be empty...</p>
+  );
 
   return (
-    <div className="my-8">
-      <form onSubmit={getDictionaryData}>
-        <input
-          type="text"
-          name="word"
-          id="word"
-          onChange={handleChange}
-          value={word}
-          className="w-full bg-[#DBE2D9] rounded-xl p-3 outline-none"
-          placeholder="Search a word"
-        />
+    <div className="my-12">
+      <form onSubmit={handleSubmit} className="w-full">
+        <div
+          className={`w-full flex items-center justify-between bg-[#F5F5F5] border border-solid border-[#F5F5F5] rounded-xl ${
+            error && "border-red-400"
+          }`}
+        >
+          <input
+            type="text"
+            name="word"
+            id="word"
+            onChange={handleChange}
+            value={input}
+            placeholder="Search for any word..."
+            className="bg-transparent p-4 w-full block outline-none text-black"
+          />
+          <FiSearch className="w-6 h-6 mr-4 text-[#A445ED]" />
+        </div>
       </form>
+      {error && errorMessage}
     </div>
   );
 };

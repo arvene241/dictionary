@@ -5,7 +5,7 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className="flex items-center justify-between mt-5">
+    <div className="flex items-center justify-between">
       <BiBook className="w-8 h-8 cursor-pointer" />
       <nav className="flex items-center">
         <button onClick={() => setToggle(!toggle)}>

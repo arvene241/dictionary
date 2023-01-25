@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply px-8;
+  }
+
+  li::marker {
+    color: #8f19e8;
+  }
+}
+
+@layer components {
+  .audioButton:hover .playIcon {
+    @apply text-white;
+  }
+}

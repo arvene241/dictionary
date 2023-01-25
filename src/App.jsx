@@ -1,17 +1,23 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Dictionary from "./components/Dictionary";
+import useGetData from "./hooks/useGetData";
 
 function App() {
-  const [dictionary, setDictionary] = useState([]);
+  const [word, getData] = useGetData();
+
+  useEffect(() => {
+    getData("hello");
+  }, []);
+
+  const render = word.empty ? null : <Dictionary data={word} />;
 
   return (
-    <div className="max-w-screen-md m-auto">
+    <div className="max-w-screen-sm min-h-screen m-auto px-2 py-12">
       <Header />
-      <SearchBar dictionary={dictionary} setDictionary={setDictionary} />
-      {dictionary && <Dictionary dictionary={dictionary} setDictionary={setDictionary} />}
+      <SearchBar onSubmit={getData} />
+      {render}
     </div>
   );
 }

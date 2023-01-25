@@ -1,25 +1,36 @@
-import { BiPlay } from "react-icons/bi";
+import Footer from "./Footer";
+import Invalid from "./Invalid";
+import Meaning from "./Meaning";
+import Synonyms from "./Synonyms";
+import WordHeader from "./WordHeader";
 
-const Dictionary = ({ dictionary, setDictionary }) => {
-  let audio = new Audio(dictionary[0]?.phonetics[0]?.audio);
-
-  const start = () => {
-    audio.play();
-  };
-
+const Dictionary = ({ data }) => {
   return (
-    <div>
-      <div>
-        <h1>{dictionary[0]?.word}</h1>
-        <h2>{dictionary[0]?.phonetic}</h2>
-        {console.log(dictionary)}
-        <div>
-          <button onClick={start} className="bg-[#A069A0] rounded-full p-3">
-            <BiPlay className="w-8 h-8 text-[#D357D3]" />
-          </button>
-        </div>
-      </div>
-    </div>
+    <main className="h-full">
+      {data.valid ? (
+        <>
+          <WordHeader
+            word={data.word}
+            phonetic={data.phonetic}
+            audioLink={data.audio}
+          />
+          <Synonyms data={data.synonyms} />
+          {data.meanings.map((item) => {
+            return (
+              <Meaning
+                key={item.partOfSpeech}
+                partOfSpeech={item.partOfSpeech}
+                definitions={item.definitions}
+              />
+            );
+          })}
+          <Footer link={data.link} />
+          {console.log(data)}
+        </>
+      ) : (
+        <Invalid />
+      )}
+    </main>
   );
 };
 
