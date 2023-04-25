@@ -30,7 +30,7 @@ const SearchBar = ({ onSubmit }) => {
     <div className="my-12">
       <form onSubmit={handleSubmit} className="w-full">
         <div
-          className={`w-full flex items-center justify-between bg-[#F5F5F5] border border-solid border-[#F5F5F5] rounded-xl ${
+          className={`w-full flex items-center justify-between bg-[#F5F5F5] dark:bg-[#1f1f1f] border-none rounded-xl ${
             error && "border-red-400"
           }`}
         >
@@ -41,7 +41,7 @@ const SearchBar = ({ onSubmit }) => {
             onChange={handleChange}
             value={input}
             placeholder="Search for any word..."
-            className="bg-transparent p-4 w-full block outline-none text-black"
+            className="bg-transparent p-4 w-full block outline-none text-black dark:text-white"
           />
           <FiSearch className="w-6 h-6 mr-4 text-[#A445ED]" />
         </div>

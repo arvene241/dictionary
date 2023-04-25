@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import Invalid from "./Invalid";
 import Meaning from "./Meaning";
-import Synonyms from "./Synonyms";
+import Nonyms from "./Nonyms";
 import WordHeader from "./WordHeader";
 
 const Dictionary = ({ data }) => {
@@ -14,7 +14,6 @@ const Dictionary = ({ data }) => {
             phonetic={data.phonetic}
             audioLink={data.audio}
           />
-          <Synonyms data={data.synonyms} />
           {data.meanings.map((item) => {
             return (
               <Meaning
@@ -24,8 +23,9 @@ const Dictionary = ({ data }) => {
               />
             );
           })}
+          <Nonyms data={data.synonyms} title="Synonyms" />
+          <Nonyms data={data.antonyms} title="Antonyms" />
           <Footer link={data.link} />
-          {console.log(data)}
         </>
       ) : (
         <Invalid />

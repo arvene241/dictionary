@@ -10,11 +10,11 @@ const cleanData = (oldData) => {
   const audio = audioSearch ? audioSearch.audio : "";
   const link = data.sourceUrls.length ? data.sourceUrls[0] : "";
   const meanings = data.meanings.length ? data.meanings : [];
-  const synonyms = data.meanings[0].synonyms.length
-    ? data.meanings[0].synonyms
+  const synonyms = data.meanings[1].synonyms.length
+    ? data.meanings[1].synonyms
     : [];
-  const antonyms = data.meanings[0].antonyms.length
-    ? data.meanings[0].antonyms
+  const antonyms = data.meanings[1].antonyms.length
+    ? data.meanings[1].antonyms
     : [];
 
   return {

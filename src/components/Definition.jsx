@@ -3,14 +3,14 @@ import React from "react";
 const Definition = ({ definitions }) => {
   return (
     <div>
-      <h2 className="text-[#757575] text-xl my-6">Meaning</h2>
+      <h2 className="text-[#757575] text-base md:text-xl my-6">Meaning</h2>
       <ul className="list-disc mx-10">
-        {definitions.map((item) => {
+        {definitions.map((item, index) => {
           return (
-            <>
-              <li className="text-black text-lg mt-3">{item.definition}</li>
-              {item.example && <p className="text-[#757575] text-lg">"{item.example}"</p>}
-            </>
+            <div key={index}>
+              <li className="text-black text-sm md:text-lg mt-3 dark:text-white">{item.definition}</li>
+              {item.example && <p className="text-[#757575] text-sm md:text-lg">"{item.example}"</p>}
+            </div>
           );
         })}
       </ul>
